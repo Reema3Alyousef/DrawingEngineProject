@@ -34,17 +34,15 @@ namespace DrawingEngine.Tokenization
             });
             Token token = tokenizer.tokenize();
             Shape shape = null;
-            List<int> xywh = new List<int>();
+            List<int> coordinates = new List<int>();
             Color color = Color.Black;
             DashStyle penStyle = DashStyle.Solid;
             int lineWidth = 2;
-            Debug.WriteLine(" befor loop "  + token.Value);
             while (token != null)
             {
-                Debug.WriteLine(token.Value);
-                //Debug.WriteLine($"value: {token.Value}        type: {token.Type}");
+                Debug.WriteLine($"value: {token.Value}        type: {token.Type}");
                 if (token != null && token.Type != TokenType.NewLine)
-                { 
+                {
                     switch (token.Type)
                     {
                         case TokenType.Shape:
@@ -56,15 +54,15 @@ namespace DrawingEngine.Tokenization
                             {
                                 shape = new Circle();
                             }
-                            else
+                            else if (token.Value == "line")
                             {
                                 shape = new LineShape();
                             }
                             break;
                         case TokenType.Number:
-                            if (xywh.Count <= 4)
+                            if (coordinates.Count <= 4)
                             {
-                                xywh.Add(int.Parse(token.Value));
+                                coordinates.Add(int.Parse(token.Value));
                             }
                             else
                             {
@@ -72,11 +70,11 @@ namespace DrawingEngine.Tokenization
                             }
                             break;
                         case TokenType.RGBColor:
+                            
                             color = getColor(token);
                             break;
                         case TokenType.NamedColor:
                             color = getColor(token);
-
                             break;
                         case TokenType.PenStyle:
                             penStyle = getPenStyle(token);
@@ -96,16 +94,16 @@ namespace DrawingEngine.Tokenization
                 }
                 if (token != null && shape != null && token.Type == TokenType.NewLine)
                 {
-                    shape.start.X = xywh[0];
-                    shape.start.Y = xywh[1];
-                    shape.width = xywh[2];
-                    shape.height = xywh[3];
+                    shape.start.X = coordinates[0];
+                    shape.start.Y = coordinates[1];
+                    shape.width = coordinates[2];
+                    shape.height = coordinates[3];
                     shape.pen = new Pen(color);
                     shape.pen.Width = lineWidth;
                     shape.pen.DashStyle = penStyle;
                     shapes.Add(shape);
                     shape = null;
-                    xywh = new List<int>();
+                    coordinates = new List<int>();
                 }
                 token = tokenizer.tokenize();
             }
@@ -117,7 +115,7 @@ namespace DrawingEngine.Tokenization
         {
             Token token = tokenizer.tokenize();
             Shape shape = null;
-            List<int> xywh = new List<int>();
+            List<int> coordinates = new List<int>();
             Color color = Color.Black;
             DashStyle penStyle = DashStyle.Solid;
             int lineWidth = 2;
@@ -141,9 +139,9 @@ namespace DrawingEngine.Tokenization
                         }
                         break;
                     case TokenType.Number:
-                        if (xywh.Count <= 4)
+                        if (coordinates.Count <= 4)
                         {
-                            xywh.Add(int.Parse(token.Value));
+                            coordinates.Add(int.Parse(token.Value));
                         }
                         else
                         {
@@ -175,10 +173,10 @@ namespace DrawingEngine.Tokenization
             }
             if (shape != null)
             {
-                shape.start.X = xywh[0];
-                shape.start.Y = xywh[1];
-                shape.width = xywh[2];
-                shape.height = xywh[3];
+                shape.start.X = coordinates[0];
+                shape.start.Y = coordinates[1];
+                shape.width = coordinates[2];
+                shape.height = coordinates[3];
                 shape.pen = new Pen(color);
                 shape.pen.Width = lineWidth;
                 shape.pen.DashStyle = penStyle;
@@ -229,6 +227,15 @@ namespace DrawingEngine.Tokenization
             {
                 return System.Drawing.Drawing2D.DashStyle.Solid;
             }
+        }
+
+        public static string getColorName(Color color)
+        {
+            if (color.IsKnownColor)
+            {
+                Debug.WriteLine(color.Name);
+            }
+            return color.Name;
         }
     }
 }

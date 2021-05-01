@@ -231,10 +231,11 @@ namespace DrawingEngine
             Color pickedColor = colorDialog1.Color;
             if (dialogResult == DialogResult.OK)
             {
+
                 this.pen.Color = colorDialog1.Color;
                 if (this.selectedShapeIndex != -1)
                 {
-                    this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                    this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
                     this.Refresh();
                 }
             }
@@ -280,7 +281,7 @@ namespace DrawingEngine
             }
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
                 this.Refresh();
             }
         }
@@ -294,7 +295,7 @@ namespace DrawingEngine
             }
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
                 this.Refresh();
             }
         }
@@ -305,7 +306,7 @@ namespace DrawingEngine
             this.pen.Width = this.fontSize;
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
                 this.Refresh();
             }
         }
@@ -361,7 +362,9 @@ namespace DrawingEngine
                 }
                 this.currentShape.start = e.Location;
                 this.currentShape.end = e.Location;
-                this.currentShape.pen = (Pen)this.pen.Clone();
+                //this.currentShape.pen = (Pen)this.pen.Clone();
+                this.currentShape.pen = new Pen(this.pen.Color, this.pen.Width);
+                Debug.WriteLine($"{this.currentShape.pen.Color.Name} color");
 
             }
             else
@@ -370,8 +373,6 @@ namespace DrawingEngine
                 {
                     if (this.shapes[selectedShapeIndex].checkSelectedShape(e))
                     {
-                        Debug.WriteLine(selectedShapeIndex);
-                        Debug.WriteLine(this.shapes.Count);
                         if (!this.shapes[selectedShapeIndex].type.Equals("line"))
                         {
                             if (this.shapes[selectedShapeIndex].checkSelectedSBoundry(e, this.shapes[selectedShapeIndex].left))
@@ -443,8 +444,6 @@ namespace DrawingEngine
                     // add shape to src code then update shapes list with  list from src code
                     this.shapes.Add(this.currentShape);
                     this.currentShapeIndex = this.shapes.IndexOf(this.currentShape);
-
-                    Debug.WriteLine(this.currentShapeIndex);
                 }
                 else
                 {
@@ -536,7 +535,7 @@ namespace DrawingEngine
                         this.shapes[currentShapeIndex].width = this.shapes[currentShapeIndex].end.X - this.shapes[currentShapeIndex].start.X;
                         this.shapes[currentShapeIndex].height = this.shapes[currentShapeIndex].end.Y - this.shapes[currentShapeIndex].start.Y;
                     }
-                    this.shapes[currentShapeIndex].pen = (Pen)this.pen.Clone();
+                    this.shapes[currentShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
                     this.currentShapeIndex = -1;
                     this.currentShape = null;
                     // remove current shape from list
