@@ -236,6 +236,7 @@ namespace DrawingEngine
                 if (this.selectedShapeIndex != -1)
                 {
                     this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                    this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                     this.Refresh();
                 }
             }
@@ -282,6 +283,7 @@ namespace DrawingEngine
             if (this.selectedShapeIndex != -1)
             {
                 this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                 this.Refresh();
             }
         }
@@ -307,6 +309,7 @@ namespace DrawingEngine
             if (this.selectedShapeIndex != -1)
             {
                 this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                 this.Refresh();
             }
         }
@@ -364,6 +367,7 @@ namespace DrawingEngine
                 this.currentShape.end = e.Location;
                 //this.currentShape.pen = (Pen)this.pen.Clone();
                 this.currentShape.pen = new Pen(this.pen.Color, this.pen.Width);
+                this.currentShape.pen.DashStyle = this.pen.DashStyle;
                 Debug.WriteLine($"{this.currentShape.pen.Color.Name} color");
 
             }
@@ -536,6 +540,7 @@ namespace DrawingEngine
                         this.shapes[currentShapeIndex].height = this.shapes[currentShapeIndex].end.Y - this.shapes[currentShapeIndex].start.Y;
                     }
                     this.shapes[currentShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                    this.shapes[currentShapeIndex].pen.DashStyle = this.pen.DashStyle;
                     this.currentShapeIndex = -1;
                     this.currentShape = null;
                     // remove current shape from list

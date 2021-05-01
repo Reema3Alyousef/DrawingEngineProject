@@ -5,6 +5,7 @@ C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\bin\Debug\net5.
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\bin\Debug\net5.0-windows\DrawingEngine.dll
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\bin\Debug\net5.0-windows\ref\DrawingEngine.dll
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\bin\Debug\net5.0-windows\DrawingEngine.pdb
+C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\obj\Debug\net5.0-windows\DrawingEngine.csprojAssemblyReference.cache
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\obj\Debug\net5.0-windows\DrawingEngine.drawingEngine.resources
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\obj\Debug\net5.0-windows\DrawingEngine.Properties.Resources.resources
 C:\Users\Ranee\Desktop\Tuwaiq\DrawingEngineProject\DrawingEngine\obj\Debug\net5.0-windows\DrawingEngine.csproj.GenerateResource.cache
