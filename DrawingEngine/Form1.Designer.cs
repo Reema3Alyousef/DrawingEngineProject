@@ -39,6 +39,7 @@ namespace DrawingEngine
             this.notDashedButton = new System.Windows.Forms.Button();
             this.dashedButton = new System.Windows.Forms.Button();
             this.Tools = new System.Windows.Forms.GroupBox();
+            this.clear_Button = new System.Windows.Forms.Button();
             this.handButton = new System.Windows.Forms.Button();
             this.drawButton = new System.Windows.Forms.Button();
             this.Shapes = new System.Windows.Forms.GroupBox();
@@ -51,7 +52,6 @@ namespace DrawingEngine
             this.designPanel = new System.Windows.Forms.Panel();
             this.sourceTab = new System.Windows.Forms.TabPage();
             this.sourceTextbox = new System.Windows.Forms.RichTextBox();
-            this.clear_Button = new System.Windows.Forms.Button();
             this.rightTab.SuspendLayout();
             this.penStyle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sizePicker)).BeginInit();
@@ -69,30 +69,28 @@ namespace DrawingEngine
             this.rightTab.Controls.Add(this.penStyle);
             this.rightTab.Controls.Add(this.Tools);
             this.rightTab.Controls.Add(this.Shapes);
-            this.rightTab.Location = new System.Drawing.Point(982, 23);
-            this.rightTab.Margin = new System.Windows.Forms.Padding(2);
+            this.rightTab.Location = new System.Drawing.Point(1277, 29);
             this.rightTab.Name = "rightTab";
-            this.rightTab.Size = new System.Drawing.Size(252, 681);
+            this.rightTab.Size = new System.Drawing.Size(328, 872);
             this.rightTab.TabIndex = 1;
             // 
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.saveButton.Location = new System.Drawing.Point(132, 51);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(2);
+            this.saveButton.Location = new System.Drawing.Point(172, 65);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(99, 45);
+            this.saveButton.Size = new System.Drawing.Size(129, 58);
             this.saveButton.TabIndex = 13;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // openButton
             // 
             this.openButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.openButton.Location = new System.Drawing.Point(20, 51);
-            this.openButton.Margin = new System.Windows.Forms.Padding(2);
+            this.openButton.Location = new System.Drawing.Point(26, 65);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(99, 45);
+            this.openButton.Size = new System.Drawing.Size(129, 58);
             this.openButton.TabIndex = 12;
             this.openButton.Text = "Open";
             this.openButton.UseVisualStyleBackColor = false;
@@ -106,11 +104,9 @@ namespace DrawingEngine
             this.penStyle.Controls.Add(this.notDashedButton);
             this.penStyle.Controls.Add(this.dashedButton);
             this.penStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.penStyle.Location = new System.Drawing.Point(20, 434);
-            this.penStyle.Margin = new System.Windows.Forms.Padding(2);
+            this.penStyle.Location = new System.Drawing.Point(26, 556);
             this.penStyle.Name = "penStyle";
-            this.penStyle.Padding = new System.Windows.Forms.Padding(2);
-            this.penStyle.Size = new System.Drawing.Size(212, 190);
+            this.penStyle.Size = new System.Drawing.Size(276, 243);
             this.penStyle.TabIndex = 12;
             this.penStyle.TabStop = false;
             this.penStyle.Text = "Pen Style";
@@ -118,8 +114,7 @@ namespace DrawingEngine
             // sizePicker
             // 
             this.sizePicker.Font = new System.Drawing.Font("Segoe UI", 10.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.sizePicker.Location = new System.Drawing.Point(140, 65);
-            this.sizePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.sizePicker.Location = new System.Drawing.Point(182, 83);
             this.sizePicker.Maximum = new decimal(new int[] {
             15,
             0,
@@ -131,7 +126,7 @@ namespace DrawingEngine
             0,
             0});
             this.sizePicker.Name = "sizePicker";
-            this.sizePicker.Size = new System.Drawing.Size(52, 36);
+            this.sizePicker.Size = new System.Drawing.Size(68, 46);
             this.sizePicker.TabIndex = 0;
             this.sizePicker.Value = new decimal(new int[] {
             5,
@@ -144,10 +139,9 @@ namespace DrawingEngine
             // 
             this.colorButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.colorButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.colorButton.Location = new System.Drawing.Point(49, 120);
-            this.colorButton.Margin = new System.Windows.Forms.Padding(2);
+            this.colorButton.Location = new System.Drawing.Point(64, 154);
             this.colorButton.Name = "colorButton";
-            this.colorButton.Size = new System.Drawing.Size(122, 45);
+            this.colorButton.Size = new System.Drawing.Size(159, 58);
             this.colorButton.TabIndex = 12;
             this.colorButton.Text = "Color";
             this.colorButton.UseVisualStyleBackColor = false;
@@ -157,10 +151,9 @@ namespace DrawingEngine
             // 
             this.size.AutoSize = true;
             this.size.Font = new System.Drawing.Font("Segoe UI", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.size.Location = new System.Drawing.Point(134, 39);
-            this.size.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.size.Location = new System.Drawing.Point(174, 50);
             this.size.Name = "size";
-            this.size.Size = new System.Drawing.Size(38, 21);
+            this.size.Size = new System.Drawing.Size(50, 30);
             this.size.TabIndex = 0;
             this.size.Text = "Size";
             // 
@@ -168,10 +161,9 @@ namespace DrawingEngine
             // 
             this.notDashedButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.notDashedButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.notDashedButton.Location = new System.Drawing.Point(79, 62);
-            this.notDashedButton.Margin = new System.Windows.Forms.Padding(2);
+            this.notDashedButton.Location = new System.Drawing.Point(103, 79);
             this.notDashedButton.Name = "notDashedButton";
-            this.notDashedButton.Size = new System.Drawing.Size(50, 45);
+            this.notDashedButton.Size = new System.Drawing.Size(65, 58);
             this.notDashedButton.TabIndex = 6;
             this.notDashedButton.Text = "━━";
             this.notDashedButton.UseVisualStyleBackColor = false;
@@ -181,10 +173,9 @@ namespace DrawingEngine
             // 
             this.dashedButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.dashedButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dashedButton.Location = new System.Drawing.Point(20, 62);
-            this.dashedButton.Margin = new System.Windows.Forms.Padding(2);
+            this.dashedButton.Location = new System.Drawing.Point(26, 79);
             this.dashedButton.Name = "dashedButton";
-            this.dashedButton.Size = new System.Drawing.Size(50, 45);
+            this.dashedButton.Size = new System.Drawing.Size(65, 58);
             this.dashedButton.TabIndex = 5;
             this.dashedButton.Text = "---";
             this.dashedButton.UseVisualStyleBackColor = false;
@@ -196,23 +187,32 @@ namespace DrawingEngine
             this.Tools.Controls.Add(this.handButton);
             this.Tools.Controls.Add(this.drawButton);
             this.Tools.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Tools.Location = new System.Drawing.Point(20, 278);
-            this.Tools.Margin = new System.Windows.Forms.Padding(2);
+            this.Tools.Location = new System.Drawing.Point(26, 356);
             this.Tools.Name = "Tools";
-            this.Tools.Padding = new System.Windows.Forms.Padding(2);
-            this.Tools.Size = new System.Drawing.Size(212, 136);
+            this.Tools.Size = new System.Drawing.Size(276, 174);
             this.Tools.TabIndex = 11;
             this.Tools.TabStop = false;
             this.Tools.Text = "Tools";
+            // 
+            // clear_Button
+            // 
+            this.clear_Button.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.clear_Button.Font = new System.Drawing.Font("Segoe UI", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.clear_Button.Location = new System.Drawing.Point(194, 68);
+            this.clear_Button.Name = "clear_Button";
+            this.clear_Button.Size = new System.Drawing.Size(65, 58);
+            this.clear_Button.TabIndex = 7;
+            this.clear_Button.Text = "🗑️";
+            this.clear_Button.UseVisualStyleBackColor = false;
+            this.clear_Button.Click += new System.EventHandler(this.clear_Button_Click);
             // 
             // handButton
             // 
             this.handButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.handButton.Font = new System.Drawing.Font("Segoe UI", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.handButton.Location = new System.Drawing.Point(25, 53);
-            this.handButton.Margin = new System.Windows.Forms.Padding(2);
+            this.handButton.Location = new System.Drawing.Point(32, 68);
             this.handButton.Name = "handButton";
-            this.handButton.Size = new System.Drawing.Size(50, 45);
+            this.handButton.Size = new System.Drawing.Size(65, 58);
             this.handButton.TabIndex = 5;
             this.handButton.Text = "✋";
             this.handButton.UseVisualStyleBackColor = false;
@@ -222,10 +222,9 @@ namespace DrawingEngine
             // 
             this.drawButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.drawButton.Font = new System.Drawing.Font("Segoe UI", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.drawButton.Location = new System.Drawing.Point(86, 53);
-            this.drawButton.Margin = new System.Windows.Forms.Padding(2);
+            this.drawButton.Location = new System.Drawing.Point(112, 68);
             this.drawButton.Name = "drawButton";
-            this.drawButton.Size = new System.Drawing.Size(50, 45);
+            this.drawButton.Size = new System.Drawing.Size(65, 58);
             this.drawButton.TabIndex = 6;
             this.drawButton.Text = "✎";
             this.drawButton.UseVisualStyleBackColor = false;
@@ -237,11 +236,9 @@ namespace DrawingEngine
             this.Shapes.Controls.Add(this.RectangleButton);
             this.Shapes.Controls.Add(this.lineButton);
             this.Shapes.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Shapes.Location = new System.Drawing.Point(20, 126);
-            this.Shapes.Margin = new System.Windows.Forms.Padding(2);
+            this.Shapes.Location = new System.Drawing.Point(26, 161);
             this.Shapes.Name = "Shapes";
-            this.Shapes.Padding = new System.Windows.Forms.Padding(2);
-            this.Shapes.Size = new System.Drawing.Size(212, 136);
+            this.Shapes.Size = new System.Drawing.Size(276, 174);
             this.Shapes.TabIndex = 10;
             this.Shapes.TabStop = false;
             this.Shapes.Text = "Shape";
@@ -249,10 +246,9 @@ namespace DrawingEngine
             // CircleButton
             // 
             this.CircleButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.CircleButton.Location = new System.Drawing.Point(20, 53);
-            this.CircleButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CircleButton.Location = new System.Drawing.Point(26, 68);
             this.CircleButton.Name = "CircleButton";
-            this.CircleButton.Size = new System.Drawing.Size(50, 45);
+            this.CircleButton.Size = new System.Drawing.Size(65, 58);
             this.CircleButton.TabIndex = 7;
             this.CircleButton.Text = "○";
             this.CircleButton.UseVisualStyleBackColor = false;
@@ -262,10 +258,9 @@ namespace DrawingEngine
             // 
             this.RectangleButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.RectangleButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RectangleButton.Location = new System.Drawing.Point(142, 53);
-            this.RectangleButton.Margin = new System.Windows.Forms.Padding(2);
+            this.RectangleButton.Location = new System.Drawing.Point(185, 68);
             this.RectangleButton.Name = "RectangleButton";
-            this.RectangleButton.Size = new System.Drawing.Size(50, 45);
+            this.RectangleButton.Size = new System.Drawing.Size(65, 58);
             this.RectangleButton.TabIndex = 9;
             this.RectangleButton.Text = "▭";
             this.RectangleButton.UseVisualStyleBackColor = false;
@@ -274,10 +269,9 @@ namespace DrawingEngine
             // lineButton
             // 
             this.lineButton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.lineButton.Location = new System.Drawing.Point(82, 53);
-            this.lineButton.Margin = new System.Windows.Forms.Padding(2);
+            this.lineButton.Location = new System.Drawing.Point(107, 68);
             this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(50, 45);
+            this.lineButton.Size = new System.Drawing.Size(65, 58);
             this.lineButton.TabIndex = 8;
             this.lineButton.Text = "╱";
             this.lineButton.UseVisualStyleBackColor = false;
@@ -288,31 +282,29 @@ namespace DrawingEngine
             this.tabs.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tabs.Controls.Add(this.designTab);
             this.tabs.Controls.Add(this.sourceTab);
-            this.tabs.Location = new System.Drawing.Point(24, 23);
-            this.tabs.Margin = new System.Windows.Forms.Padding(2);
+            this.tabs.Location = new System.Drawing.Point(31, 29);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(953, 681);
+            this.tabs.Size = new System.Drawing.Size(1239, 872);
             this.tabs.TabIndex = 0;
+            this.tabs.SelectedIndexChanged += new System.EventHandler(this.tabs_SelectedIndexChanged);
             // 
             // designTab
             // 
             this.designTab.Controls.Add(this.designPanel);
-            this.designTab.Location = new System.Drawing.Point(4, 4);
-            this.designTab.Margin = new System.Windows.Forms.Padding(2);
+            this.designTab.Location = new System.Drawing.Point(8, 8);
             this.designTab.Name = "designTab";
-            this.designTab.Padding = new System.Windows.Forms.Padding(2);
-            this.designTab.Size = new System.Drawing.Size(945, 643);
+            this.designTab.Padding = new System.Windows.Forms.Padding(3);
+            this.designTab.Size = new System.Drawing.Size(1223, 818);
             this.designTab.TabIndex = 0;
             this.designTab.Text = "Design";
             this.designTab.UseVisualStyleBackColor = true;
             // 
             // designPanel
             // 
-            this.designPanel.Location = new System.Drawing.Point(2, 2);
-            this.designPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.designPanel.Location = new System.Drawing.Point(3, 3);
             this.designPanel.Name = "designPanel";
-            this.designPanel.Size = new System.Drawing.Size(938, 634);
+            this.designPanel.Size = new System.Drawing.Size(1219, 812);
             this.designPanel.TabIndex = 0;
             this.designPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.designPanel_Paint);
             this.designPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.designPanel_MouseClick);
@@ -323,50 +315,34 @@ namespace DrawingEngine
             // sourceTab
             // 
             this.sourceTab.Controls.Add(this.sourceTextbox);
-            this.sourceTab.Location = new System.Drawing.Point(4, 4);
-            this.sourceTab.Margin = new System.Windows.Forms.Padding(2);
+            this.sourceTab.Location = new System.Drawing.Point(8, 8);
             this.sourceTab.Name = "sourceTab";
-            this.sourceTab.Padding = new System.Windows.Forms.Padding(2);
-            this.sourceTab.Size = new System.Drawing.Size(945, 643);
+            this.sourceTab.Padding = new System.Windows.Forms.Padding(3);
+            this.sourceTab.Size = new System.Drawing.Size(1223, 818);
             this.sourceTab.TabIndex = 1;
             this.sourceTab.Text = "Source";
             this.sourceTab.UseVisualStyleBackColor = true;
             // 
             // sourceTextbox
             // 
-            this.sourceTextbox.Location = new System.Drawing.Point(0, 2);
-            this.sourceTextbox.Margin = new System.Windows.Forms.Padding(2);
+            this.sourceTextbox.Location = new System.Drawing.Point(0, 3);
             this.sourceTextbox.Name = "sourceTextbox";
-            this.sourceTextbox.Size = new System.Drawing.Size(948, 638);
+            this.sourceTextbox.Size = new System.Drawing.Size(1231, 816);
             this.sourceTextbox.TabIndex = 0;
             this.sourceTextbox.Text = "";
             this.sourceTextbox.TextChanged += new System.EventHandler(this.sourceTextbox_TextChanged);
             this.sourceTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sourceTextbox_KeyDown);
             // 
-            // clear_Button
-            // 
-            this.clear_Button.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.clear_Button.Font = new System.Drawing.Font("Segoe UI", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.clear_Button.Location = new System.Drawing.Point(149, 53);
-            this.clear_Button.Margin = new System.Windows.Forms.Padding(2);
-            this.clear_Button.Name = "clear_Button";
-            this.clear_Button.Size = new System.Drawing.Size(50, 45);
-            this.clear_Button.TabIndex = 7;
-            this.clear_Button.Text = "🗑️";
-            this.clear_Button.UseVisualStyleBackColor = false;
-            this.clear_Button.Click += new System.EventHandler(this.clear_Button_Click);
-            // 
             // drawingEngine
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::DrawingEngine.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1252, 730);
+            this.ClientSize = new System.Drawing.Size(1628, 934);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.rightTab);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "drawingEngine";
             this.Text = "Drawing Engine";
             this.rightTab.ResumeLayout(false);
