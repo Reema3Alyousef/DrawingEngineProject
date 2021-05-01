@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "rwhamlVSsw3Hr4hifPAckEnuf+DrcqYvbF5nalXwMp4AR4Cf3tLAtvWDHZY1hDBH7b10UwTFvX8Ff+T3bBFXSA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\maryam\\source\\repos\\DrawingEngineProject\\DrawingEngine\\DrawingEngine.csproj",
+=======
   "dgSpecHash": "f6/GnKUymjx4WPt5KygoeUtb13iO2OmaWHW15m/lKBwzWJd7mRWgZgzScAIEcHEadf651iFW3O8xiG123JdpEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ranee\\Desktop\\Tuwaiq\\DrawingEngineProject\\DrawingEngine\\DrawingEngine.csproj",
+>>>>>>> factoring
   "expectedPackageFiles": [],
   "logs": []
 }

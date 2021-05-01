@@ -339,7 +339,9 @@ namespace DrawingEngine
             this.sourceTextbox.Name = "sourceTextbox";
             this.sourceTextbox.Size = new System.Drawing.Size(948, 638);
             this.sourceTextbox.TabIndex = 0;
-            this.sourceTextbox.Text = "Source code will be shown here.";
+            this.sourceTextbox.Text = "";
+            this.sourceTextbox.TextChanged += new System.EventHandler(this.sourceTextbox_TextChanged);
+            this.sourceTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sourceTextbox_KeyDown);
             // 
             // clear_Button
             // 

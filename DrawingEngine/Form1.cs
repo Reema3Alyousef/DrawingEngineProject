@@ -9,10 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using DrawingEngine.Tokenization;
+using DrawingEngine.Tokenization.Handlers;
 using System.Drawing.Drawing2D;
 
 namespace DrawingEngine
 {
+    enum ShapeType
+    {
+        Line,
+        Circle,
+        Rectangle
+    }
     public partial class drawingEngine : Form
     {
         /// <summary>
@@ -37,7 +45,8 @@ namespace DrawingEngine
         Pen pen;
         OpenFileDialog fileDialog = new OpenFileDialog();
         string line = "";
-
+        StringBuilder sb = new StringBuilder();
+        Parser parser;
         /// <summary>
         /// Shape Class and it's childredn
         /// </summary>
@@ -68,7 +77,10 @@ namespace DrawingEngine
 
         public class Circle : Shape
         {
-
+            public Circle()
+            {
+                this.type = "circle";
+            }
             public override void draw(PaintEventArgs e)
             {
 
@@ -100,6 +112,10 @@ namespace DrawingEngine
 
         public class LineShape : Shape
         {
+            public LineShape()
+            {
+                this.type = "line";
+            }
             public override void draw(PaintEventArgs e)
             {
 
@@ -130,6 +146,10 @@ namespace DrawingEngine
 
         public class RectShape : Shape
         {
+            public RectShape()
+            {
+                this.type = "rectangle";
+            }
             public override void draw(PaintEventArgs e)
             {
 
@@ -203,11 +223,10 @@ namespace DrawingEngine
 
         private void colorButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult;
-            dialogResult = colorDialog1.ShowDialog();
+            DialogResult dialogResult = colorDialog1.ShowDialog();
+            Color pickedColor = colorDialog1.Color;
             if (dialogResult == DialogResult.OK)
             {
-                Debug.WriteLine(colorDialog1.Color.Name);
                 this.pen.Color = colorDialog1.Color;
                 if (this.selectedShapeIndex != -1)
                 {
@@ -346,6 +365,8 @@ namespace DrawingEngine
                 {
                     if (this.shapes[selectedShapeIndex].checkSelectedShape(e))
                     {
+                        Debug.WriteLine(selectedShapeIndex);
+                        Debug.WriteLine(this.shapes.Count);
                         if (!this.shapes[selectedShapeIndex].type.Equals("line"))
                         {
                             if (this.shapes[selectedShapeIndex].checkSelectedSBoundry(e, this.shapes[selectedShapeIndex].left))
@@ -407,13 +428,14 @@ namespace DrawingEngine
             {
 
                 if (this.currentShapeIndex == -1)
-                {
+                { // throws null exception
                     this.currentShape.end = e.Location;  //get the current location 
                     if (!this.currentShape.type.Equals("line"))
                     {
                         this.currentShape.width = this.currentShape.end.X - this.currentShape.start.X;
                         this.currentShape.height = this.currentShape.end.Y - this.currentShape.start.Y;
                     }
+                    // add shape to src code then update shapes list with  list from src code
                     this.shapes.Add(this.currentShape);
                     this.currentShapeIndex = this.shapes.IndexOf(this.currentShape);
 
@@ -512,7 +534,8 @@ namespace DrawingEngine
                     this.shapes[currentShapeIndex].pen = (Pen)this.pen.Clone();
                     this.currentShapeIndex = -1;
                     this.currentShape = null;
-
+                    // remove current shape from list
+                    // get new list 
                     Refresh();
 
                 }
@@ -545,8 +568,69 @@ namespace DrawingEngine
             }
             if (this.selectedShapeIndex != -1)
             {
-                shapes[this.selectedShapeIndex].drawBoundaries(e);
+                this.shapes[this.selectedShapeIndex].drawBoundaries(e);
             }
+        }
+
+
+        private void sourceTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                sb.Clear();
+                sb.Append(sourceTextbox.Text);
+
+
+
+                //tokenize sb
+                parser = new Parser();
+                this.shapes = parser.ParseSourceCode(sb.ToString());
+                foreach (var shape in shapes)
+                {
+                    Debug.WriteLine($"shape: {shape.type} x: {shape.start.X} y: {shape.start.Y} w: {shape.width} h: {shape.height} color: {shape.pen.Color.Name}");
+                }
+            //    Tokenizer t = new Tokenizer(new Input(sb.ToString()), new Tokenizable[]
+            //{
+            //            //new ShapeHandler(),
+            //            new ColorHandler(),
+            //            new StringTokenizer(),
+            //            new WhiteSpaceHandler(),
+            //            new SpecialCharacterHandler(),
+            //            new NumberHandler()
+
+
+            //    });
+
+            //    Token token = t.tokenize();
+            //    while (token != null)
+            //    {
+            //        Debug.WriteLine($"value: {token.Value}        type: {token.Type}");
+            //        token = t.tokenize();
+            //    }
+                //    Tokenizer t = new Tokenizer(new Input(sb.ToString()), new Tokenizable[]
+                //{
+                //    //new ShapeHandler(),
+                //    new ColorHandler(),
+                //    new StringTokenizer(),
+                //    new WhiteSpaceHandler(),
+                //    new SpecialCharacterHandler(),
+                //    new NumberHandler()
+
+                //});
+                ////parser = new Parser(t);
+                //Shape s = parser.ParseLine();
+                //Debug.WriteLine(s.start.X);
+                //Debug.WriteLine(s.start.Y);
+                //Debug.WriteLine(s.height);
+                //Debug.WriteLine(s.width);
+                //Debug.WriteLine(s.pen.Color.Name);
+                Debug.WriteLine("----------------------------------------");
+            }
+        }
+
+        private void sourceTextbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void clear_Button_Click(object sender, EventArgs e)
@@ -561,6 +645,9 @@ namespace DrawingEngine
             this.resizeTop = false;
             this.isClicked = false;
             this.Refresh();
+                
+                
+            }
         }
-    }
+
 }
