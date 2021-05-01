@@ -268,7 +268,12 @@ namespace DrawingEngine
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            if (!this.drawMood) this.drawMood = true; //draw mood
+            if (!this.drawMood) 
+            {
+                this.drawMood = true; //draw mood
+                this.selectedShapeIndex = -1;
+                this.Refresh();
+            }
         }
 
         private void dashedButton_Click(object sender, EventArgs e)
