@@ -194,7 +194,7 @@ namespace DrawingEngine.Tokenization
             
             foreach (var shape in shapesList)
             {
-                sb.Append($"{shape.type} {shape.start.X}, {shape.start.Y}, {shape.width}, {shape.height} {shape.pen.Color.Name} {shape.pen.DashStyle} \n");
+                sb.Append($"{shape.type} {shape.start.X}, {shape.start.Y}, {shape.width}, {shape.height} {shape.pen.Color.Name} {shape.pen.DashStyle.ToString().ToLower()} \n");
             }
             return sb;
         }
