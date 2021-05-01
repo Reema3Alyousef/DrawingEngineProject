@@ -200,15 +200,17 @@ namespace DrawingEngine
 
         private void openButton_Click(object sender, EventArgs e)
         {
+
             if (fileDialog.ShowDialog() == DialogResult.OK || Path.GetExtension(fileDialog.FileName).Equals(".drw"))
             {
-                StreamReader sr = new StreamReader(fileDialog.FileName);
+                sourceTextbox.Text = "";
+                   StreamReader sr = new StreamReader(fileDialog.FileName);
                 while (line != null)
                 {
                     line = sr.ReadLine();
                     if (line != null)
                     {
-                        sourceTextbox.AppendText("\r\n" + line);
+                        sourceTextbox.AppendText(line);
                         sourceTextbox.ScrollToCaret();
                     }
 
@@ -228,13 +230,13 @@ namespace DrawingEngine
         private void colorButton_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = colorDialog1.ShowDialog();
-            Color pickedColor = colorDialog1.Color;
             if (dialogResult == DialogResult.OK)
             {
                 this.pen.Color = colorDialog1.Color;
                 if (this.selectedShapeIndex != -1)
                 {
-                    this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                    this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                    this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                     this.Refresh();
                 }
             }
@@ -261,13 +263,17 @@ namespace DrawingEngine
             {
                 this.drawMood = false;
                 this.selectedShapeIndex = -1;
-
             } 
         }
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            if (!this.drawMood) this.drawMood = true; //draw mood
+            if (!this.drawMood) 
+            {
+                this.drawMood = true; //draw mood
+                this.selectedShapeIndex = -1;
+                this.Refresh();
+            }
         }
 
         private void dashedButton_Click(object sender, EventArgs e)
@@ -276,11 +282,11 @@ namespace DrawingEngine
             {
                 this.pen.DashStyle = DashStyle.Dash;
                 this.solidStyle = !this.solidStyle; //dashed
- 
             }
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                 this.Refresh();
             }
         }
@@ -294,7 +300,8 @@ namespace DrawingEngine
             }
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                 this.Refresh();
             }
         }
@@ -305,7 +312,8 @@ namespace DrawingEngine
             this.pen.Width = this.fontSize;
             if (this.selectedShapeIndex != -1)
             {
-                this.shapes[this.selectedShapeIndex].pen = (Pen)this.pen.Clone();
+                this.shapes[this.selectedShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                this.shapes[this.selectedShapeIndex].pen.DashStyle = this.pen.DashStyle;
                 this.Refresh();
             }
         }
@@ -316,8 +324,6 @@ namespace DrawingEngine
             {
                 foreach (var shape in shapes)
                 {
-
-
                     if (shape.checkSelectedShape(e))
                     {
                         this.selectedShapeIndex = this.shapes.IndexOf(shape);
@@ -326,15 +332,10 @@ namespace DrawingEngine
                     else
                     {
                         this.selectedShapeIndex = -1;
-
                     }
-
-
                 }
                 this.Refresh();
             }
-
-
         }
 
         private void designPanel_MouseDown(object sender, MouseEventArgs e)
@@ -342,7 +343,6 @@ namespace DrawingEngine
             if (this.drawMood)
             {
                 this.isDrawing = !this.isDrawing; //true
-
 
                 switch (this.shapeName)
                 {
@@ -361,7 +361,8 @@ namespace DrawingEngine
                 }
                 this.currentShape.start = e.Location;
                 this.currentShape.end = e.Location;
-                this.currentShape.pen = (Pen)this.pen.Clone();
+                this.currentShape.pen = new Pen(this.pen.Color, this.pen.Width);
+                this.currentShape.pen.DashStyle = this.pen.DashStyle;
 
             }
             else
@@ -370,8 +371,6 @@ namespace DrawingEngine
                 {
                     if (this.shapes[selectedShapeIndex].checkSelectedShape(e))
                     {
-                        Debug.WriteLine(selectedShapeIndex);
-                        Debug.WriteLine(this.shapes.Count);
                         if (!this.shapes[selectedShapeIndex].type.Equals("line"))
                         {
                             if (this.shapes[selectedShapeIndex].checkSelectedSBoundry(e, this.shapes[selectedShapeIndex].left))
@@ -420,10 +419,7 @@ namespace DrawingEngine
                     this.Refresh();
                 }
 
-
             }
-
-
 
         }
 
@@ -443,8 +439,6 @@ namespace DrawingEngine
                     // add shape to src code then update shapes list with  list from src code
                     this.shapes.Add(this.currentShape);
                     this.currentShapeIndex = this.shapes.IndexOf(this.currentShape);
-
-                    Debug.WriteLine(this.currentShapeIndex);
                 }
                 else
                 {
@@ -536,8 +530,9 @@ namespace DrawingEngine
                         this.shapes[currentShapeIndex].width = this.shapes[currentShapeIndex].end.X - this.shapes[currentShapeIndex].start.X;
                         this.shapes[currentShapeIndex].height = this.shapes[currentShapeIndex].end.Y - this.shapes[currentShapeIndex].start.Y;
                     }
-                    this.shapes[currentShapeIndex].pen = (Pen)this.pen.Clone();
-                    this.currentShapeIndex = -1;
+                    this.shapes[currentShapeIndex].pen = new Pen(this.pen.Color, this.pen.Width);
+                    this.shapes[currentShapeIndex].pen.DashStyle = this.pen.DashStyle;
+                    this.currentShapeIndex = -1; 
                     this.currentShape = null;
                     // remove current shape from list
                     // get new list 
@@ -582,7 +577,7 @@ namespace DrawingEngine
         {
             if (e.KeyData == Keys.Enter)
             {
-                sb.Clear();
+                //sb.Clear();
                 sb.Append(sourceTextbox.Text);
 
                 //tokenize sb
