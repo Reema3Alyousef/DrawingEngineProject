@@ -358,6 +358,7 @@ namespace DrawingEngine
                 this.currentShape.end = e.Location;
                 this.currentShape.pen = new Pen(this.pen.Color, this.pen.Width);
                 this.currentShape.pen.DashStyle = this.pen.DashStyle;
+
             }
             else
             {
