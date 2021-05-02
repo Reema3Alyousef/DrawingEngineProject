@@ -1,5 +1,5 @@
-# DrawingEngineProject
-Simple drawing engine made in C# using GDI+ library
+# Drawing Engine Project
+Simple drawing engine made by C# using GDI+ library
 
 ## Demo
 
@@ -8,7 +8,7 @@ Simple drawing engine made in C# using GDI+ library
 
 <img src="srccode.gif" alt="drawing" width="500"/>
 
-## Made by:
+## Made by
 - Reema Alyousef
 - Raneen Alzafarani
 - Batool Alghamdi
