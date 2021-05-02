@@ -69,7 +69,13 @@ namespace DrawingEngine.Tokenization
         public Input step(int numOfSteps = 1)
         {
             if (hasMore(numOfSteps))
+            {
                 position += numOfSteps;
+                if (this.peek() == '\n')
+                {
+                    this.lineNumber++;
+                }
+            } 
             else
             {
                 throw new Exception("There is no more step");

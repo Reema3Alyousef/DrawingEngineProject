@@ -180,17 +180,13 @@ namespace DrawingEngine
 
         }
 
-
         public drawingEngine()
         {
             InitializeComponent();
+            parser = new Parser();
             this.pen = new Pen(Color.Black, this.fontSize);
             tabs.SelectTab("designTab");
         }
-
-     
-
-    
 
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -210,11 +206,14 @@ namespace DrawingEngine
                     line = sr.ReadLine();
                     if (line != null)
                     {
-                        sourceTextbox.AppendText(line);
+                        sourceTextbox.AppendText(line + '\n');
                         sourceTextbox.ScrollToCaret();
                     }
 
                 }
+                this.sb.Clear();
+                this.sb.Append(this.sourceTextbox.Text);
+                this.Refresh();
                 sr.Close();
             }
             else
@@ -534,8 +533,6 @@ namespace DrawingEngine
                     this.shapes[currentShapeIndex].pen.DashStyle = this.pen.DashStyle;
                     this.currentShapeIndex = -1; 
                     this.currentShape = null;
-                    // remove current shape from list
-                    // get new list 
                     Refresh();
 
                 }
@@ -562,6 +559,7 @@ namespace DrawingEngine
 
         private void designPanel_Paint(object sender, PaintEventArgs e)
         {
+            this.shapes = parser.ParseSourceCode(sb.ToString());
             foreach (var shape in shapes)
             {
                 shape.draw(e);
@@ -577,17 +575,12 @@ namespace DrawingEngine
         {
             if (e.KeyData == Keys.Enter)
             {
-                //sb.Clear();
+                sb.Clear();
                 sb.Append(sourceTextbox.Text);
-
+                
                 //tokenize sb
-                parser = new Parser();
                 this.shapes = parser.ParseSourceCode(sb.ToString());
-                foreach (var shape in shapes)
-                {
-                    Debug.WriteLine($"shape: {shape.type} x: {shape.start.X} y: {shape.start.Y} w: {shape.width} h: {shape.height} color: {shape.pen.Color.Name}");
-                }
-                Debug.WriteLine("----------------------------------------");
+                this.Refresh();
             }
         }
 
@@ -608,15 +601,13 @@ namespace DrawingEngine
             this.resizeTop = false;
             this.isClicked = false;
             this.Refresh();
-                
-                
             }
 
         private void tabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.parser = new Parser();
-            this.sb = parser.getSourceCode(this.shapes);
-            sourceTextbox.Text = this.sb.ToString();
+                this.sb = parser.getSourceCode(this.shapes);
+                sourceTextbox.Text = this.sb.ToString();
+                this.Refresh();
         }
 
         private void saveButton_Click(object sender, EventArgs e)

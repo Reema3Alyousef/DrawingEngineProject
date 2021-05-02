@@ -11,22 +11,17 @@ namespace DrawingEngine.Tokenization.Handlers
     {
         public override bool tokenizable(Tokenizer t)
         {
-            char currentCharacter = t.input.peek();
-            return Char.IsWhiteSpace(currentCharacter);
+            return Char.IsWhiteSpace(t.input.peek());
         }
-
-        // rect 10,10,100,100
 
         static bool IsSpace(Input input)
         {
-            char currentCharacter = input.peek();
-            return Char.IsWhiteSpace(currentCharacter);
+            return Char.IsWhiteSpace(input.peek());
         }
 
         public override Token tokenize(Tokenizer t)
         {
             string value = t.input.loop(IsSpace);
-            Debug.WriteLine(Environment.NewLine);
             //value.Equals(Environment.NewLine)
             if (value.Equals("\n"))
             {

@@ -15,19 +15,12 @@ namespace DrawingEngine.Tokenization.Handlers
         public StringTokenizer()
         {
             this.shapesKeywords = new List<string> { "rect", "cir", "line" };
-            this.penStyleKeywords = new List<string> { "solid", "dashed", "dotted" };
+            this.penStyleKeywords = new List<string> { "solid", "dash", "dot" };
         }
         
         public override bool tokenizable(Tokenizer t)
         {
             return Char.IsLetter(t.input.peek());
-        }
-
-        public bool isEscape(Tokenizer t)
-        {
-            char ch = t.input.step().Character;
-            return (ch == '\"' || ch == '\\' || ch == '\r'
-                    || ch == '\n' || ch == '\b' || ch == '\t' || ch == '\f');
         }
 
         static bool isLetter(Input input)
